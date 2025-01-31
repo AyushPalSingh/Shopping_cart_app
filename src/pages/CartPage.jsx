@@ -31,20 +31,20 @@ function CartPage({cartItems, setCartItems}) {
             ))}
           </div>
 
-          <div className="w-80 h-fit sticky top-10 bg-white p-6 rounded-md shadow-md border gap-2">
+          <div className="w-80 h-fit sticky top-10 bg-white p-6 rounded-md shadow-md border gap-5">
             <h1 className="text-2xl font-bold mb-4">Cart Summary</h1>
-            <div className="border-t pt-4">
+            <div className="border-t pt-4 gap-3">
               <div className="text-left text-lg">
                 {" "}
                 Total item : {cartItems.reduce((acc, cItem) => 1 + acc, 0)}
               </div>
-              <div className="flex  items-center gap-2">
+              <div className="flex items-center gap-3">
                 <span className="text-lg">Total Price : </span>
                 <span className="text-xl font-bold gap-2">
                   ${cartItems.reduce((acc, cItem) => cItem.price + acc, 0)}
                 </span>
               </div>
-            </div>{" "}
+            </div>
             <div>
               <button
                 onClick={() => {
@@ -52,9 +52,9 @@ function CartPage({cartItems, setCartItems}) {
                   navigate("/");
                   toast.success(`Purchased Successfully with price = $ ${cartItems.reduce((acc, cItem) => cItem.price + acc, 0)}`)
                 }}
-                className="bg-green-500 text-white px-4 py-2 rounded-md text-2xl text-ellipsis "
+                className="bg-green-500 text-white px-4 py-2 rounded-md text-2xl text-ellipsis cursor-pointer"
               >
-                CheckOut
+                Checkout
               </button>
             </div>
           </div>

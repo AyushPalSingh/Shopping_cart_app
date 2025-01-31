@@ -5,6 +5,7 @@ import CartPage from './pages/CartPage'
 import { NavLink } from 'react-router-dom'
 import Navbar from './component/NavBar'
 import PacmanLoader from "react-spinners/PacmanLoader";
+import Filter from './component/Filter'
 
 function App() {
 const [cartItems, setCartItems] = useState([])

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 
+
 function Card({ title, description, price, image, cartItems, setCartItems }) {
   const handleAddCart = () => {
     setCartItems([
@@ -16,7 +17,7 @@ function Card({ title, description, price, image, cartItems, setCartItems }) {
     toast.success("Removed Successfully")
   };
   return (
-    <div className="border border-gray-200 w-[350px] h-[380px] rounded-lg p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg shadow-xl">
+    <div className="border border-gray-200 w-[330px] h-[380px] rounded-lg p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg shadow-xl">
       <div className="flex flex-col justify-center items-center gap-5">
         <h1 className="font-bold text-center">{`${title.slice(0,20)}...`}</h1>
         {/* // slice is used to limit the description */}
