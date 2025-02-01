@@ -1,3 +1,4 @@
+
 import { NavLink } from "react-router-dom"
 import { MdShoppingCartCheckout } from "react-icons/md"
 function Navbar({cartItems}) {
