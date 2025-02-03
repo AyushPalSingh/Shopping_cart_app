@@ -7,17 +7,18 @@ import Navbar from './component/NavBar'
 import PacmanLoader from "react-spinners/PacmanLoader";
 import Filter from './component/Filter'
 import Test from './pages/Test'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { setIsLoading } from './redux/slices/isLoadingSlice'
+import { setProducts } from './redux/slices/productsSlice'
+import { setError } from './redux/slices/errorSlice'
+
 
 function App() {
-const [cartItems, setCartItems] = useState([])
-const [error, setError] = useState(null)
-const [products, setProducts] = useState([])
-// Change this line
-const isLoading = useSelector((state) => state.isLoading.value)
-const dispatch = useDispatch()
+  console.log("App.jsx")
+const isLoading = useSelector((state)=>state.isLoading)
+const error = useSelector((state)=>state.error)
 
+const dispatch = useDispatch()
 const fetchData = async () => {
   try{
       dispatch(setIsLoading(true))
@@ -25,28 +26,29 @@ const fetchData = async () => {
       console.log(response)
       const data = await response.json()
       console.log(data)
-      setProducts(data)
+      dispatch(setProducts(data))
   }
   catch(error){
     console.log(error.message)
-    setError(error.message)
+    dispatch(setError(error.message))
   }
   finally{
     dispatch(setIsLoading(false))
+    
   }
 }
 // to prevent the infinite loop (re-rendering)
 useEffect(() => {
   fetchData()
-}, [dispatch])
+}, [])
 
  return (
-     <div className='min-h-screen w-full'>
-     <Navbar cartItems={cartItems} />
+     <div>
+     <Navbar />
     <div className= {` py-7 flex ${isLoading?"h-140":"h-full"} w-screen flex-col justify-center items-center`}>
-    {isLoading ? (<PacmanLoader />):(<Routes>
-      <Route path="/" element={<Home cartItems={cartItems} setCartItems={setCartItems} products={products}/>} />
-      <Route path="/CartPage" element={<CartPage cartItems={cartItems} setCartItems={setCartItems} />} />
+    {isLoading ? (<PacmanLoader />):error? <p className="font-bold text-red-500 flex justify-center items-center h-130 ">  { error }</p>:(<Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/CartPage" element={<CartPage />} />
       <Route path="/Test" element={<Test />} />
     </Routes>)}
     

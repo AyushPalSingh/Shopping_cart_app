@@ -1,10 +1,16 @@
 import { toast } from "sonner"
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import { setCartItems } from "../redux/slices/cartItemsSlice";
+import { useSelector, useDispatch } from "react-redux";
 
-function CartCard({item, cartItems, setCartItems}) {
-const handleRemove = () => {
+
+function CartCard({item}) {
+    const dispatch = useDispatch()
+    const cartItems = useSelector((state) => state.cartItems)
+    
+    const handleRemove = () => { 
     const newCartItems = cartItems.filter((cItem) => item.title !== cItem.title)
-    setCartItems(newCartItems)
+    dispatch(setCartItems(newCartItems))
     toast.success("Removed Successfully")
   }
   return (

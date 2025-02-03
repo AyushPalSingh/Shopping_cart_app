@@ -1,7 +1,12 @@
 
 import { NavLink } from "react-router-dom"
 import { MdShoppingCartCheckout } from "react-icons/md"
-function Navbar({cartItems}) {
+import { setDisplayProducts } from "../redux/slices/displayProductsSlice"
+import { useSelector } from "react-redux"
+
+function Navbar() {
+  const cartItems = useSelector((state) => state.cartItems)
+  console.log("Nav.jsx=",cartItems)
   return (
     <nav className="bg-gray-900 p-10 ">
         <div className="flex justify-between px-42">

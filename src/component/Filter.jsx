@@ -1,17 +1,20 @@
 import Card from "./Card"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { setDisplayProducts } from "../redux/slices/displayProductsSlice"
 
-function Filter({products,setDisplayProducts}) {
+function Filter({products }) {
+const dispatch = useDispatch()
 const categories = ["All", ...new Set(products.map(item => item.category))]
 const [selectedCategory, setSelectedCategory] = useState("All")
 
   const handleAddToCart = (category) => {
     setSelectedCategory(category)
     if(category === "All"){
-      setDisplayProducts(products)
+      dispatch(setDisplayProducts(products))
     }
     else{
-        setDisplayProducts(products.filter(item=>(item.category===category)))
+        dispatch(setDisplayProducts(products.filter(item=>(item.category===category))))
     }
     
   }

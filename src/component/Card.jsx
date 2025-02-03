@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { setCartItems } from "../redux/slices/cartItemsSlice";
 
 
-function Card({ title, description, price, image, cartItems, setCartItems }) {
+function Card({ title, description, price, image }) {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cartItems);
+  
   const handleAddCart = () => {
-    setCartItems([
+    dispatch(setCartItems([
       ...cartItems,
-      { title, description, price, image, cartItems, setCartItems },
-    ]);
+      { title, description, price, image },
+    ]));
     toast.success("Added to cart");
   };
 
   const removeHandler = () => {
     const newCartItems = cartItems.filter((item) => item.title !== title);
-    setCartItems(newCartItems);
+    dispatch(setCartItems(newCartItems));
     toast.success("Removed Successfully")
   };
   return (
